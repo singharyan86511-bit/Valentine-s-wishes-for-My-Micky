@@ -128,3 +128,130 @@ setInterval(createHeart,300);
 
 </body>
 </html>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Micky ❤️</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+font-family:Arial;
+background:linear-gradient(45deg,#ff758c,#ff7eb3);
+color:white;
+text-align:center;
+overflow:hidden;
+}
+
+#intro{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:32px;
+animation:fadeOut 3s forwards;
+animation-delay:2s;
+z-index:999;
+}
+
+@keyframes fadeOut{
+to{
+opacity:0;
+visibility:hidden;
+}
+}
+
+h1{
+font-size:32px;
+animation:zoom 2s infinite alternate;
+}
+
+@keyframes zoom{
+from{transform:scale(1);}
+to{transform:scale(1.08);}
+}
+
+img{
+max-width:90%;
+height:auto;
+object-fit:contain;
+border-radius:18px;
+border:5px solid white;
+box-shadow:0 15px 40px rgba(0,0,0,0.35);
+margin-top:20px;
+}
+
+.message{
+font-size:20px;
+padding:20px;
+max-width:700px;
+}
+
+.heart{
+position:fixed;
+bottom:-10px;
+font-size:22px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-110vh);opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+✨ For Someone Very Special... ❤️
+</div>
+
+<h1>Thanks Micky ❤️</h1>
+
+<img src="micky.jpg">
+
+<div class="message">
+Thanks Micky meri jaan ❤️ for coming into my life 🧬  
+Thanks for being my everything ❤️  
+I am always yours 💕
+</div>
+
+<audio autoplay loop>
+<source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function createHeart(){
+const heart = document.createElement("div");
+heart.className = "heart";
+heart.innerHTML = "❤️";
+heart.style.left = Math.random()*100 + "vw";
+heart.style.fontSize = (Math.random()*20+10) + "px";
+heart.style.animationDuration = (Math.random()*3+3) + "s";
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},6000);
+}
+
+setInterval(createHeart,300);
+</script>
+
+</body>
+</html>
