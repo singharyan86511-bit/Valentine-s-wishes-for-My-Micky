@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Micky ❤️</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    font-family:Arial;
+    background:linear-gradient(45deg,#ff758c,#ff7eb3);
+    color:white;
+    text-align:center;
+    overflow:hidden;
+}
+
+h1{
+    font-size:30px;
+    animation:zoom 2s infinite alternate;
+}
+
+@keyframes zoom{
+    from{transform:scale(1);}
+    to{transform:scale(1.1);}
+}
+
+img{
+    width:220px;
+    height:220px;
+    object-fit:cover;
+    border-radius:50%;
+    border:5px solid white;
+    margin:15px;
+    box-shadow:0 0 30px pink;
+}
+
+button{
+    padding:14px 24px;
+    margin:10px;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.yes{
+    background:#00c853;
+    color:white;
+}
+
+.no{
+    background:#ff1744;
+    color:white;
+    position:absolute;
+}
+
+/* hearts */
+.heart{
+    position:fixed;
+    top:-10px;
+    animation:fall linear forwards;
+}
+
+@keyframes fall{
+    to{transform:translateY(110vh);}
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="typing"></h1>
+
+<img src="micky.jpg">
+
+<div>
+<button class="yes" onclick="yesClicked()">YES 💖</button>
+<button class="no" id="noBtn">NO 😜</button>
+</div>
+
+<audio autoplay loop>
+<source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+// Typing animation
+const text = "Micky ❤️ Will You Be My Valentine?";
+let i = 0;
+
+function typeWriter(){
+    if(i < text.length){
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter,70);
+    }
+}
+
+typeWriter();
+
+// YES clicked
+function yesClicked(){
+    document.body.innerHTML = `
+    <h1>YAYYY ❤️</h1>
+    <h2>You just made me the happiest person 🥰</h2>
+    <p>I promise to always keep you smiling 😊</p>
+    `;
+}
+
+// Moving NO button
+const noBtn=document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover",()=>{
+    noBtn.style.top=Math.random()*80+"vh";
+    noBtn.style.left=Math.random()*80+"vw";
+});
+
+// Floating hearts
+setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.innerHTML="❤️";
+    heart.classList.add("heart");
+
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+10)+"px";
+    heart.style.animationDuration=(Math.random()*3+2)+"s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },5000);
+},300);
+
+</script>
+
+</body>
+</html>
