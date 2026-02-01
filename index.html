@@ -5,137 +5,183 @@
 <title>For Micky ❤️</title>
 
 <style>
+
 body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    font-family:Arial;
-    background:linear-gradient(45deg,#ff758c,#ff7eb3);
-    color:white;
-    text-align:center;
-    overflow:hidden;
+margin:0;
+font-family:Arial;
+background:linear-gradient(45deg,#ff758c,#ff7eb3);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+overflow:hidden;
+text-align:center;
 }
 
-h1{
-    font-size:30px;
-    animation:zoom 2s infinite alternate;
+/* MAIN BOX */
+.container{
+animation:fade 2s;
 }
 
-@keyframes zoom{
-    from{transform:scale(1);}
-    to{transform:scale(1.1);}
-}
-
+/* PHOTO */
 img{
-    width:220px;
-    height:220px;
-    object-fit:cover;
-    border-radius:50%;
-    border:5px solid white;
-    margin:15px;
-    box-shadow:0 0 30px pink;
+width:260px;
+height:260px;
+object-fit:cover;
+border-radius:14px;
+border:6px solid white;
+box-shadow:0 20px 60px rgba(0,0,0,0.4);
+margin-bottom:20px;
 }
 
+/* TEXT SLIDER */
+.slide{
+position:absolute;
+width:80%;
+max-width:500px;
+left:50%;
+transform:translateX(-50%);
+opacity:0;
+font-size:24px;
+font-weight:bold;
+animation:slider 28s infinite;
+}
+
+.slide:nth-child(1){animation-delay:0s;}
+.slide:nth-child(2){animation-delay:7s;}
+.slide:nth-child(3){animation-delay:14s;}
+.slide:nth-child(4){animation-delay:21s;}
+
+@keyframes slider{
+0%{opacity:0; transform:translate(-50%,40px);}
+10%{opacity:1; transform:translate(-50%,0);}
+25%{opacity:1;}
+35%{opacity:0;}
+100%{opacity:0;}
+}
+
+/* BUTTONS */
 button{
-    padding:14px 24px;
-    margin:10px;
-    border:none;
-    border-radius:10px;
-    font-size:18px;
-    cursor:pointer;
+padding:14px 28px;
+border:none;
+border-radius:12px;
+font-size:18px;
+cursor:pointer;
+margin:10px;
 }
 
 .yes{
-    background:#00c853;
-    color:white;
+background:#00c853;
+color:white;
 }
 
 .no{
-    background:#ff1744;
-    color:white;
-    position:absolute;
+background:#ff1744;
+color:white;
+position:absolute;
 }
 
-/* hearts */
+/* HEARTS */
 .heart{
-    position:fixed;
-    top:-10px;
-    animation:fall linear forwards;
+position:absolute;
+bottom:-10px;
+font-size:20px;
+animation:float 6s linear infinite;
 }
 
-@keyframes fall{
-    to{transform:translateY(110vh);}
+@keyframes float{
+0%{transform:translateY(0);}
+100%{transform:translateY(-120vh);}
 }
+
+@keyframes fade{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+/* MUSIC BUTTON */
+.music{
+position:absolute;
+top:20px;
+right:20px;
+background:white;
+color:#ff4d6d;
+font-weight:bold;
+}
+
 </style>
 </head>
 
 <body>
 
-<h1 id="typing"></h1>
+<div class="container">
 
 <img src="micky.jpg">
 
-<div>
-<button class="yes" onclick="yesClicked()">YES 💖</button>
-<button class="no" id="noBtn">NO 😜</button>
+<div class="slide">❤️ Thanks Micky meri jaan for coming into my life 🧬</div>
+<div class="slide">You are my everything ❤️</div>
+<div class="slide">I am always yours 🤍</div>
+<div class="slide">My world feels perfect because of you ✨</div>
+
+<br><br><br><br>
+
+<h2>Will you always be mine? ❤️</h2>
+
+<button class="yes" onclick="alert('Best decision ever ❤️')">
+YES 💖
+</button>
+
+<button class="no" id="noBtn">
+NO 😜
+</button>
+
 </div>
 
-<audio autoplay loop>
-<source src="song.mp3" type="audio/mpeg">
+<!-- MUSIC -->
+<audio id="song" loop>
+<source src="song.mp3" type="audio/mp3">
 </audio>
+
+<button class="music" onclick="playMusic()">
+🎵 Play Music
+</button>
 
 <script>
 
-// Typing animation
-const text = "Micky ❤️ Will You Be My Valentine?";
-let i = 0;
-
-function typeWriter(){
-    if(i < text.length){
-        document.getElementById("typing").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter,70);
-    }
+// play music
+function playMusic(){
+document.getElementById("song").play();
 }
 
-typeWriter();
+// NO button runs away 😄
+let no=document.getElementById("noBtn");
 
-// YES clicked
-function yesClicked(){
-    document.body.innerHTML = `
-    <h1>YAYYY ❤️</h1>
-    <h2>You just made me the happiest person 🥰</h2>
-    <p>I promise to always keep you smiling 😊</p>
-    `;
+no.addEventListener("touchstart",moveBtn);
+no.addEventListener("mouseover",moveBtn);
+
+function moveBtn(){
+no.style.top=Math.random()*80+"vh";
+no.style.left=Math.random()*80+"vw";
 }
 
-// Moving NO button
-const noBtn=document.getElementById("noBtn");
+// hearts
+function createHeart(){
+let heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="❤️";
 
-noBtn.addEventListener("mouseover",()=>{
-    noBtn.style.top=Math.random()*80+"vh";
-    noBtn.style.left=Math.random()*80+"vw";
-});
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(15+Math.random()*25)+"px";
 
-// Floating hearts
-setInterval(()=>{
-    const heart=document.createElement("div");
-    heart.innerHTML="❤️";
-    heart.classList.add("heart");
+document.body.appendChild(heart);
 
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.fontSize=(Math.random()*20+10)+"px";
-    heart.style.animationDuration=(Math.random()*3+2)+"s";
+setTimeout(()=>{
+heart.remove();
+},6000);
+}
 
-    document.body.appendChild(heart);
-
-    setTimeout(()=>{
-        heart.remove();
-    },5000);
-},300);
+setInterval(createHeart,350);
 
 </script>
 
